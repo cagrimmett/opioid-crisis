@@ -33,13 +33,14 @@
 
  **51 line charts**
 
-In [51 lines/index.html](51 lines/index.html)
+In [51 lines/index.html](51%20lines/index.html)
 
 - One for each state
 - Right now they will have three datapoints: 2013, 2014, and 2015.
 - Upward sloping lines will be red, downward green. (decrease bad, increase good)
 
 Proof of concept:
+
 ![](51 lines/51_lines.png)
 
 
