@@ -48,10 +48,9 @@ d3.csv('States2010-2015-stacked.csv', function(d) {
       .domain([0, d3.max(groupedData, function(d) { return d3.max(d.values, function (d) { return d.adjrate; }); })])
       .range([150, 0]);
 
-  var area = d3.area()
+  var line = d3.line()
             .x(function(d) { return x(d.year); })
-            .y0(y(0))
-            .y1(function(d) { return y(d.adjrate); });
+            .y(function(d) { return y(d.adjrate); });
 
 //console.log(line);
 
@@ -64,15 +63,15 @@ d3.csv('States2010-2015-stacked.csv', function(d) {
                               .attr('height', '250')
                               .append("path")
                               .attr("class", "line")
-                              .attr("d", function(d) { return area(d.values); })
-                              //.attr('stroke', 'black')
-                              .attr("fill", "black")
+                              .attr("d", function(d) { return line(d.values); })
+                              .attr('stroke', 'black')
+                              .attr("fill", "none")
                               .attr('stroke-width', 2);
 
 var labels =  container.selectAll("svg")
                       .append('text')
-                      .attr('fill', 'white')
-                      .attr('x', '10')
+                      .attr('fill', 'black')
+                      .attr('x', '5')
                       .attr('y', '140')
                       .text(function(d) { return d.key; });
 
