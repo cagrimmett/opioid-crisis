@@ -1,19 +1,139 @@
-<html>
-	<head>
-		<script src="d3.js"></script>
-		<title>State Changes</title>
-		<style>
-		
-		
-		</style>
-	</head>
+<!DOCTYPE html>
+<style>
+body {
+  padding: 5px 5px 5px 5px;
+}
+.state {
+  width: 250px;
+  height: 150px;
+  background-color: #fff;
+  float: left;
+  margin:20px;
+}
+.state p {
+  font-weight: bold;
+  text-align: center;
+}
+</style>
 <body>
-
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-		
+var parseTime = d3.timeParse("%Y");
 
-	
-	
+d3.csv('States2010-2015-stacked.csv', function(d) {
+  d.year = parseTime(d.year);
+  d.adjrate = +d.adjrate;
+  d.deaths = +d.deaths;
+  return d;
+}, function(d) {
+
+    var groupedData = d3.nest()
+                      .key(function(d) { return d.state; })
+                      //.rollup(function(d) {return d.deaths})
+                      .entries(d);
+
+
+    var container = d3.select("body")
+                      .append('div')
+                      .attr('id', 'container');
+
+                          console.log(groupedData);
+  var x = d3.scaleTime()
+      .domain([d3.min(groupedData, function(d) { return d3.min(d.values, function (d) { return d.year; }); }),
+               d3.max(groupedData, function(d) { return d3.max(d.values, function (d) { return d.year; }); })])
+      .range([0, 250]);
+
+
+  var y = d3.scaleLinear()
+      .domain([0, d3.max(groupedData, function(d) { return d3.max(d.values, function (d) { return d.adjrate; }); })])
+      .range([150, 0]);
+
+  var area = d3.area()
+            .x(function(d) { return x(d.year); })
+            .y0(y(0))
+            .y1(function(d) { return y(d.adjrate); });
+
+//console.log(line);
+
+    var stateBoxes = container.selectAll("div")
+                              .data(groupedData).enter().append('div')
+                              .attr('class', 'state')
+                              .attr('id', function(d){return d.key;})
+                              .append('svg')
+                              .attr('width', '250')
+                              .attr('height', '250')
+                              .append("path")
+                              .attr("class", "line")
+                              .attr("d", function(d) { return area(d.values); })
+                              //.attr('stroke', 'black')
+                              .attr("fill", "black")
+                              .attr('stroke-width', 2);
+
+var labels =  container.selectAll("svg")
+                      .append('text')
+                      .attr('fill', 'white')
+                      .attr('x', '10')
+                      .attr('y', '140')
+                      .text(function(d) { return d.key; });
+
+                              //.append('p').text(function(d){return d.key;});
+
+
+
+
+
+/*
+    var line1 = container.selectAll("div")
+                          .append("svg").attr('width', '250px').attr('height', '250px')
+                          .append('line')
+                              .attr('x1', 0)
+                              .attr('y1', function(d){return d.ten;})
+                              .attr('x2', 50)
+                              .attr('y2', function(d){return d.eleven;})
+                              .style('stroke', function(d) {
+                                if ((d.eleven - d.ten) > 0) {return "red";}
+                                else { return "green";}
+                              })
+                              .attr('stroke-width', 2);
+
+    var line2 = container.selectAll("svg")
+                          .append('line')
+                              .attr('x1', 50)
+                              .attr('y1', function(d){return d.eleven;})
+                              .attr('x2', 100)
+                              .attr('y2', function(d){return d.twelve;})
+                              .style('stroke', '#000')
+                              .attr('stroke-width', 2);
+
+    var line3 = container.selectAll("svg")
+                          .append('line')
+                              .attr('x1', 100)
+                              .attr('y1', function(d){return d.twelve;})
+                              .attr('x2', 150)
+                              .attr('y2', function(d){return d.thirteen;})
+                              .style('stroke', '#000')
+                              .attr('stroke-width', 2);
+
+    var line4 = container.selectAll("svg")
+                          .append('line')
+                              .attr('x1', 150)
+                              .attr('y1', function(d){return d.thirteen;})
+                              .attr('x2', 200)
+                              .attr('y2', function(d){return d.fourteen;})
+                              .style('stroke', '#000')
+                              .attr('stroke-width', 2);
+
+    var line5 = container.selectAll("svg")
+                          .append('line')
+                              .attr('x1', 200)
+                              .attr('y1', function(d){return d.fourteen;})
+                              .attr('x2', 250)
+                              .attr('y2', function(d){return d.fifteen;})
+                              .style('stroke', '#000')
+                              .attr('stroke-width', 2);
+*/
+
+
+});
+
 </script>
-</body>
-</html>
