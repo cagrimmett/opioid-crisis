@@ -41,7 +41,7 @@ In [51 lines/index.html](51%20lines/index.html)
 
 Proof of concept:
 
-![](51 lines/51_lines.png)
+![](51%20lines/51_lines.png)
 
 
  **State map**
