@@ -31,29 +31,35 @@
 
 ## Ideas
 
- **51 line charts** 
+ **51 line charts**
+
+In [51 lines/index.html](51 lines/index.html)
 
 - One for each state
 - Right now they will have three datapoints: 2013, 2014, and 2015.
 - Upward sloping lines will be red, downward green. (decrease bad, increase good)
 
- **State map** 
+Proof of concept:
+![](51 lines/51_lines.png)
+
+
+ **State map**
 
 - Transition from year to year, colors showing severity
 - Hover tells more info
 
- **Pill Bottle filling up** 
+ **Pill Bottle filling up**
 
 - Shows summary for US
 - Yearly transtions
 
- **Pills** 
+ **Pills**
 
 - Landing page
 - Each one represents a death in the last X years
 - A la [NYTimes Immigrants](https://www.nytimes.com/interactive/2016/11/29/us/trump-unauthorized-immigrants.html)
 
- **Bump Chart** 
+ **Bump Chart**
 
 - Add state glyphs next to each label
 - Add rates
@@ -62,7 +68,7 @@
 
   ![](https://static.notion-static.com/9648aa7e257e41c48d802562d336f4c0/2010-2015_Opioid_Deaths_from_RAW.png)
 
-   **Rate change line change chart** 
+   **Rate change line change chart**
 
   ![](https://static.notion-static.com/c1a7663e41654b74b5f43f67bc909778/m655051e1f.gif)
 
